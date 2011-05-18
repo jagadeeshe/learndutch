@@ -1,11 +1,13 @@
 {% load site_tags %}
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
 <!DOCTYPE HTML>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>{% block title %}Learn Dutch{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}styles/main.css">
-    <script type="text/javascript" src="{{ STATIC_URL }}scripts/jquery-1.6.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}styles/main.css">
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}scripts/jquery-1.6.1.js"></script>
 </head>
 <body>
 <div id="site-hdr" class="bbg"><h1>Learn Dutch Easy Way</h1></div>
@@ -13,7 +15,7 @@
     <div id="menu" class="fll pll ptl">
         {% main_menu %}
     </div>
-    <div id="content" class="blg">
+    <div id="content" class="blg pll ptl">
         {% block content %}{% endblock %}
     </div>
     <div class="clr"></div>
