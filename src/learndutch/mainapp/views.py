@@ -29,3 +29,8 @@ def add_verb(request):
         form = VerbForm()
     ctx['form'] = form
     return render_to_response('add_verb.html', ctx)
+
+
+def search_word(reqeust, word=''):
+    ctx = {'word': word}
+    return render_to_response('word.html', ctx)

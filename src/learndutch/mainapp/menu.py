@@ -6,6 +6,7 @@ Created on May 18, 2011
 
 main_menu = (
     ('Home', '/'),
-    ('Add noun', '/word/add-noun/'),
-    ('Add verb', '/word/add-verb/'),
+    ('Add noun', '/add-noun/'),
+    ('Add verb', '/add-verb/'),
+    ('Search', '/word/'),
 )

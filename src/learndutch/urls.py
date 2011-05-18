@@ -17,6 +17,8 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     
     url(r'^$', TemplateView.as_view(template_name="index.html"), name="home"),
-    url(r'^word/add-noun/$', 'mainapp.views.add_noun', name="add-noun"),
-    url(r'^word/add-verb/$', 'mainapp.views.add_verb', name="add-verb"),
+    url(r'^add-noun/$', 'mainapp.views.add_noun', name="add-noun"),
+    url(r'^add-verb/$', 'mainapp.views.add_verb', name="add-verb"),
+    url(r'^word/$', 'mainapp.views.search_word', name='search-word'),
+    url(r'^word/(?P<word>(\w+-?)+)/$', 'mainapp.views.search_word', name='search-word'),
 )
