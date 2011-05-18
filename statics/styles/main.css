@@ -9,6 +9,9 @@ a, a:hover, a:focus { text-decoration: none; }
 
 h1 { text-align: center; }
 
+input, textarea { border: 1px solid gray; padding: 3px; }
+input[type='submit'] { padding: 3px 12px; }
+input[type='text'] { width: 175px; }
 
 .fll { float: left; }
 .clr { clear: both; }
@@ -28,3 +31,10 @@ h1 { text-align: center; }
  #menu, #content { float: left;}
     #menu { width: 175px; }
     #content { min-height: 500px; }
+
+form p { padding: 0 0 6px 0; }
+form label { float: left; width: 140px; }
+.errorlist { color: red; }
+
+#verb {width: 500px; }
+#verb td { width: 33%; padding: 3px;}

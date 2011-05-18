@@ -1,7 +1,38 @@
 {% extends "master.html" %}
 {% block content %}
 <form action="{% url add-verb %}" method="post">{% csrf_token %}
-    {{ form.as_p }}
+    {{ form.non_field_errors }}
+    <p>{{ form.word.errors }} <label for="id_word">Word:</label> {{ form.word }} </p>
+    <p>{{ form.meaning.errors }} <label for="id_word">Meaning:</label> {{ form.meaning }} </p>
+    <p>{{ form.info.errors }} <label for="id_word">Info:</label> {{ form.info }} </p>
+    <table id="verb">
+        <tr>
+            <td>&nbsp;</td>
+            <td>O.T.T.</td>
+            <td>O.V.T.</td>
+        </tr>
+        <tr>
+            <td>Ik</td>
+            <td>{{ form.present_1st.errors }} {{ form.present_1st }}</td>
+            <td>{{ form.past_1st.errors }} {{ form.past_1st }}</td>
+        </tr>
+        <tr>
+            <td>Jij/U</td>
+            <td>{{ form.present_2nd.errors }} {{ form.present_2nd }}</td>
+            <td>{{ form.past_2nd.errors }} {{ form.past_2nd }}</td>
+        </tr>
+        <tr>
+            <td>Jij/Zij/het</td>
+            <td>{{ form.present_3rd.errors }} {{ form.present_3rd }}</td>
+            <td>{{ form.past_3rd.errors }} {{ form.past_3rd }}</td>
+        </tr>
+        <tr>
+            <td>Wij <br/> Jullie/U <br/> Zij</td>
+            <td> &nbsp; </td>
+            <td valign="top">{{ form.past_plural.errors }} {{ form.past_plural }}</td>
+        </tr>
+    </table>
+    <p> V.T.T. {{ form.past_perfect.errors }}  {{ form.past_perfect }} </p>
     <input type="submit" value="Submit" />
 </form>
 {% endblock %}
