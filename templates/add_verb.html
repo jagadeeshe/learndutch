@@ -1,4 +1,7 @@
 {% extends "master.html" %}
 {% block content %}
-    
+<form action="{% url add-verb %}" method="post">{% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Submit" />
+</form>
 {% endblock %}

@@ -25,17 +25,17 @@ class Noun(Word):
 
 
 class Verb(Word):
-    present_1st = models.CharField(max_length=255, null=True)
-    present_2nd = models.CharField(max_length=255, null=True)
-    present_3rd = models.CharField(max_length=255, null=True)
-    past_1st = models.CharField(max_length=255, null=True)
-    past_2nd = models.CharField(max_length=255, null=True)
-    past_3rd = models.CharField(max_length=255, null=True)
-    past_plural = models.CharField(max_length=255, null=True)
-    past_perfect_1st = models.CharField(max_length=255, null=True)
-    past_perfect_2nd = models.CharField(max_length=255, null=True)
-    past_perfect_3rd = models.CharField(max_length=255, null=True)
-    past_perfect_plular = models.CharField(max_length=255, null=True)
+    present_1st = models.CharField(max_length=255, null=True, blank=True)
+    present_2nd = models.CharField(max_length=255, null=True, blank=True)
+    present_3rd = models.CharField(max_length=255, null=True, blank=True)
+    past_1st = models.CharField(max_length=255, null=True, blank=True)
+    past_2nd = models.CharField(max_length=255, null=True, blank=True)
+    past_3rd = models.CharField(max_length=255, null=True, blank=True)
+    past_plural = models.CharField(max_length=255, null=True, blank=True)
+    past_perfect_1st = models.CharField(max_length=255, null=True, blank=True)
+    past_perfect_2nd = models.CharField(max_length=255, null=True, blank=True)
+    past_perfect_3rd = models.CharField(max_length=255, null=True, blank=True)
+    past_perfect_plular = models.CharField(max_length=255, null=True, blank=True)
 
 
 class Sentence(models.Model):
