@@ -16,7 +16,7 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     # url(r'^admin/', include(admin.site.urls)),
     
-    url(r'^$', TemplateView.as_view(template_name="index.html")),
-    url(r'^word/add-noun/$', 'mainapp.views.add_noun'),
-    url(r'^word/add-verb/$', 'mainapp.views.add_verb'),
+    url(r'^$', TemplateView.as_view(template_name="index.html"), name="home"),
+    url(r'^word/add-noun/$', 'mainapp.views.add_noun', name="add-noun"),
+    url(r'^word/add-verb/$', 'mainapp.views.add_verb', name="add-verb"),
 )

@@ -3,8 +3,8 @@ from django.db import models
 
 class Word(models.Model):
     word = models.CharField(max_length=255, unique=True)
-    meaning = models.CharField(max_length=255, null=True)
-    info = models.CharField(max_length=1024, null=True)
+    meaning = models.CharField(max_length=255, null=True, blank=True)
+    info = models.CharField(max_length=1024, null=True, blank=True)
 
 
 class Noun(Word):
@@ -20,8 +20,8 @@ class Noun(Word):
     )
     definite_article = models.IntegerField(choices=DEFINITE_ARTICLE_CHOICES)
     indefinite_article = models.IntegerField(choices=INDEFINITE_ARTICLE_CHOICES)
-    plural = models.CharField(max_length=255, null=True)
-    diminutive = models.CharField(max_length=255, null=True)
+    plural = models.CharField(max_length=255, null=True, blank=True)
+    diminutive = models.CharField(max_length=255, null=True, blank=True)
 
 
 class Verb(Word):
