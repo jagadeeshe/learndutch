@@ -1,7 +1,13 @@
 {% extends "master.html" %}
 {% block content %}
 <form action="{% url add-noun %}" method="post">{% csrf_token %}
-    {{ form.as_p }}
+    <p>{{ form.word.errors }} <label for="id_word">{{ form.word.label }}:</label> {{ form.word }} </p>
+    <p>{{ form.meaning.errors }} <label for="id_meaning">Meaning:</label> {{ form.meaning }} </p>
+    <p class="mbl bbo">{{ form.info.errors }} <label for="id_info">{{ form.info.label }}:</label> {{ form.info }} </p>
+    <div class="row-list label-ws">{{ form.definite_article.errors }} <label for="id_definite_article">{{ form.definite_article.label }}:</label> {{ form.definite_article }} </div>
+    <div class="row-list label-ws">{{ form.indefinite_article.errors }} <label for="id_indefinite_article">{{ form.indefinite_article.label }}:</label> {{ form.indefinite_article }} </div>
+    <p>{{ form.plural.errors }} <label for="id_plural">{{ form.plural.label }}:</label> {{ form.plural }} </p>
+    <p class="bbo mbl">{{ form.diminutive.errors }} <label for="id_diminutive">{{ form.diminutive.label }}:</label> {{ form.diminutive }} </p>
     <input type="submit" value="Submit" />
 </form>
 {% endblock %}

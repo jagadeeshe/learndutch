@@ -2,10 +2,10 @@
 {% block content %}
 <form action="{% url add-verb %}" method="post">{% csrf_token %}
     {{ form.non_field_errors }}
-    <p>{{ form.word.errors }} <label for="id_word">Word:</label> {{ form.word }} </p>
-    <p>{{ form.meaning.errors }} <label for="id_word">Meaning:</label> {{ form.meaning }} </p>
-    <p>{{ form.info.errors }} <label for="id_word">Info:</label> {{ form.info }} </p>
-    <table id="verb">
+    <p>{{ form.word.errors }} <label for="id_word">{{ form.word.label }}:</label> {{ form.word }} </p>
+    <p>{{ form.meaning.errors }} <label for="id_meaning">{{ form.meaning.label }}:</label> {{ form.meaning }} </p>
+    <p class="mbl bbo">{{ form.info.errors }} <label for="id_info">{{ form.info.label }}:</label> {{ form.info }} </p>
+    <table class="frm-table mbl bbo">
         <tr>
             <td>&nbsp;</td>
             <td>O.T.T.</td>
@@ -31,8 +31,14 @@
             <td> &nbsp; </td>
             <td valign="top">{{ form.past_plural.errors }} {{ form.past_plural }}</td>
         </tr>
+   </table>
+   <table class="frm-table mbl bbo">
+        <tr>
+            <td valign="top">V.T.T.</td>
+            <td>{{ form.past_perfect_aux.errors }} {{ form.past_perfect_aux }}</td>
+            <td valign="top">{{ form.past_perfect.errors }}  {{ form.past_perfect }}</td>
+        </tr>
     </table>
-    <p> V.T.T. {{ form.past_perfect.errors }}  {{ form.past_perfect }} </p>
     <input type="submit" value="Submit" />
 </form>
 {% endblock %}

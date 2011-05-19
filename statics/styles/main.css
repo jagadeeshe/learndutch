@@ -22,7 +22,11 @@ input[type='text'] { width: 175px; }
 .brg { border-right: 1px solid green; }
 .blg { border-left: 1px solid green; }
 
+.bbo { border-bottom: 1px solid orange; }
+
 .mtl { margin-top: 12px; }
+.mbl { margin-bottom: 12px; }
+
 .pll { padding-left: 12px; }
 .ptl { padding-top: 12px; }
 
@@ -32,9 +36,15 @@ input[type='text'] { width: 175px; }
     #menu { width: 175px; }
     #content { min-height: 500px; }
 
-form p { padding: 0 0 6px 0; }
+form { padding: 12px; }
+
+form p, form div { padding: 0 0 6px 0; }
 form label { float: left; width: 140px; }
 .errorlist { color: red; }
 
-#verb {width: 500px; }
-#verb td { width: 33%; padding: 3px;}
+.frm-table {width: 500px; }
+.frm-table td { width: 33%; padding: 3px;}
+
+.row-list ul { display: inline-block; }
+.row-list li { float: left; }
+.label-ws li label { width: 90px; }

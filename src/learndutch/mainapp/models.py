@@ -9,17 +9,15 @@ class Word(models.Model):
 
 class Noun(Word):
     DEFINITE_ARTICLE_CHOICES = (
-        (0, ''),
         (1, 'de'),
         (2, 'het'),
     )
     INDEFINITE_ARTICLE_CHOICES = (
-        (0, ''),
         (1, 'een'),
-        (2, '--'),
+        (2, '/'),
     )
-    definite_article = models.IntegerField(choices=DEFINITE_ARTICLE_CHOICES)
-    indefinite_article = models.IntegerField(choices=INDEFINITE_ARTICLE_CHOICES)
+    definite_article = models.IntegerField(null=True, blank=True, choices=DEFINITE_ARTICLE_CHOICES)
+    indefinite_article = models.IntegerField(null=True, blank=True, choices=INDEFINITE_ARTICLE_CHOICES)
     plural = models.CharField(max_length=255, null=True, blank=True)
     diminutive = models.CharField(max_length=255, null=True, blank=True)
 
@@ -36,7 +34,7 @@ class Verb(Word):
     past_2nd = models.CharField(max_length=255, null=True, blank=True)
     past_3rd = models.CharField(max_length=255, null=True, blank=True)
     past_plural = models.CharField(max_length=255, null=True, blank=True)
-    past_perfect_aux = models.IntegerField(choices=PAST_PERFECT_AUX_CHOICES)
+    past_perfect_aux = models.IntegerField(null=True, blank=True, choices=PAST_PERFECT_AUX_CHOICES)
     past_perfect = models.CharField(max_length=255, null=True, blank=True)
 
 
