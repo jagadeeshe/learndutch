@@ -1,36 +1,25 @@
 from django.shortcuts import render_to_response, redirect
 from django.core.context_processors import csrf
+from django.views.generic import CreateView, DetailView
 
 from forms import NounForm, VerbForm
-
-def add_noun(request):
-    ctx = {}
-    ctx.update(csrf(request))
-    if request.method == "POST":
-        form = NounForm(request.POST)
-        if form.is_valid():
-            form.save()
-            redirect('/word/add-noun/')
-    else:
-        form = NounForm()
-    ctx['form'] = form
-    return render_to_response('add_noun.html', ctx)
+from models import Word
 
 
-def add_verb(request):
-    ctx = {}
-    ctx.update(csrf(request))
-    if request.method == "POST":
-        form = VerbForm(request.POST)
-        if form.is_valid():
-            form.save()
-            redirect('/word/add-verb/')
-    else:
-        form = VerbForm()
-    ctx['form'] = form
-    return render_to_response('add_verb.html', ctx)
+class CreateNounView(CreateView):
+    form_class = NounForm
+    template_name = "add_noun.html"
+    success_url = "/word/add-noun/"
 
 
-def search_word(reqeust, word=''):
-    ctx = {'word': word}
-    return render_to_response('word.html', ctx)
+class CreateVerbView(CreateView):
+    form_class = VerbForm
+    template_name = "add_verb.html"
+    success_url = "/word/add-verb/"
+
+
+class WordView(DetailView):
+    template_name = "word.html"
+    slug_field = "word"
+    model = Word
+

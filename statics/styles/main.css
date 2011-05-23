@@ -9,8 +9,8 @@ a, a:hover, a:focus { text-decoration: none; }
 
 h1 { text-align: center; }
 
-input, textarea { border: 1px solid gray; padding: 3px; }
-input[type='submit'] { padding: 3px 12px; }
+input[type='text'], textarea { border: 1px solid gray; padding: 3px; }
+input[type='submit'], input[type='button'] { padding: 3px 12px; }
 input[type='text'] { width: 175px; }
 
 .fll { float: left; }
@@ -27,6 +27,7 @@ input[type='text'] { width: 175px; }
 .mtl { margin-top: 12px; }
 .mbl { margin-bottom: 12px; }
 
+.pm { padding: 6px; }
 .pll { padding-left: 12px; }
 .ptl { padding-top: 12px; }
 
@@ -48,3 +49,7 @@ form label { float: left; width: 140px; }
 .row-list ul { display: inline-block; }
 .row-list li { float: left; }
 .label-ws li label { width: 90px; }
+
+
+#site-search { position: relative; top: 6px; }
+#word-input { width: 225px;}

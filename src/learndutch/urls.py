@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 from django.views.generic import TemplateView
+from learndutch.mainapp.views import *
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -17,8 +18,7 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     
     url(r'^$', TemplateView.as_view(template_name="index.html"), name="home"),
-    url(r'^add-noun/$', 'mainapp.views.add_noun', name="add-noun"),
-    url(r'^add-verb/$', 'mainapp.views.add_verb', name="add-verb"),
-    url(r'^word/$', 'mainapp.views.search_word', name='search-word'),
-    url(r'^word/(?P<word>(\w+-?)+)/$', 'mainapp.views.search_word', name='search-word'),
+    url(r'^add-noun/$', CreateNounView.as_view(), name="add-noun"),
+    url(r'^add-verb/$', CreateVerbView.as_view(), name="add-verb"),
+    url(r'^word/(?P<slug>(\w+-?)+)/$', WordView.as_view(), name='search-word'),
 )

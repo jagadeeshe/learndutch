@@ -8,9 +8,17 @@
     <title>{% block title %}Learn Dutch{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{{ STATIC_PREFIX }}styles/main.css">
     <script type="text/javascript" src="{{ STATIC_PREFIX }}scripts/jquery-1.6.1.js"></script>
+    <script type="text/javascript" src="{{ STATIC_PREFIX }}scripts/word.js"></script>
 </head>
 <body>
-<div id="site-hdr" class="bbg"><h1>Learn Dutch Easy Way</h1></div>
+<div id="site-hdr" class="bbg"><h1>Learn Dutch Easy Way</h1>
+<div id="site-search">
+<form id="search-frm">
+    <input type="text" name="word-input" id="word-input" class="pm"></input>
+    <input type="button" name="search" id="search" value="Search"></input>
+</form>
+</div>
+</div>
 <div id="site-bdy">
     <div id="menu" class="fll pll ptl">
         {% main_menu %}
@@ -22,4 +30,9 @@
 </div>
 <div id="site-ftr" class="btg"></div>
 </body>
+<script type="text/javascript">
+$(document).ready(function() {
+	WordSearch.init();
+});
+</script>
 </html>
