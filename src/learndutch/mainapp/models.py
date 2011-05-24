@@ -1,7 +1,10 @@
 from django.db import models
 
+WORD_TYPE_NOUN = 1
+WORD_TYPE_VERB = 2
 
 class Word(models.Model):
+    word_type = models.IntegerField(blank=True)
     word = models.CharField(max_length=255, unique=True)
     meaning = models.CharField(max_length=255, null=True, blank=True)
     info = models.CharField(max_length=1024, null=True, blank=True)
