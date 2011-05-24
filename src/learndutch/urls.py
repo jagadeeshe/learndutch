@@ -21,4 +21,5 @@ urlpatterns = patterns('',
     url(r'^add-noun/$', CreateNounView.as_view(), name="add-noun"),
     url(r'^add-verb/$', CreateVerbView.as_view(), name="add-verb"),
     url(r'^word/(?P<slug>(\w+-?)+)/$', WordView.as_view(), name='search-word'),
+    url(r'^words/$', WordListView.as_view(), name="words"),
 )

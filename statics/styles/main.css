@@ -6,8 +6,10 @@ body { margin:0 auto; width: 900px; position: relative; display: block; }
 ul { list-style: none; }
 
 a, a:hover, a:focus { text-decoration: none; }
+a { color: blue; }
 
 h1 { text-align: center; }
+h4 { font-weight: normal; font-size: 11pt; }
 
 input[type='text'], textarea { border: 1px solid gray; padding: 3px; }
 input[type='submit'], input[type='button'] { padding: 3px 12px; }
@@ -53,3 +55,5 @@ form label { float: left; width: 140px; }
 
 #site-search { position: relative; top: 6px; }
 #word-input { width: 225px;}
+
+.item-list li { padding-bottom: 6px; }
