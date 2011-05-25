@@ -3,19 +3,21 @@ from django.core.context_processors import csrf
 from django.views.generic import CreateView, DetailView, ListView
 
 from forms import NounForm, VerbForm
-from models import Word, Noun, Verb
+from models import Word, Noun, Verb, WORD_TYPE_NOUN, WORD_TYPE_VERB
 
 
 class CreateNounView(CreateView):
     form_class = NounForm
     template_name = "add_noun.html"
     success_url = "/add-noun/"
+    initial = {'word_type': WORD_TYPE_NOUN}
 
 
 class CreateVerbView(CreateView):
     form_class = VerbForm
     template_name = "add_verb.html"
     success_url = "/add-verb/"
+    initial = {'word_type': WORD_TYPE_VERB}
 
 
 class WordView(DetailView):
