@@ -1,4 +1,9 @@
 {% extends "master.html" %}
 {% block content %}
-    {{ object.word }}
+    {% if object.is_noun %}
+        {% include "noun.html" with noun=object.noun %}
+    {% endif %}
+    {% if object.is_verb %}
+        {% include "verb.html" with verb=object.verb %}
+    {% endif %}
 {% endblock %}

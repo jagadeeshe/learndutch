@@ -3,11 +3,27 @@ from django.db import models
 WORD_TYPE_NOUN = 1
 WORD_TYPE_VERB = 2
 
+def lookup_value(choices, key, default='?'):
+    for k, v in choices:
+        if k == key: return v
+    return default
+
 class Word(models.Model):
     word_type = models.IntegerField(blank=True)
     word = models.CharField(max_length=255, unique=True)
     meaning = models.CharField(max_length=255, null=True, blank=True)
     info = models.CharField(max_length=1024, null=True, blank=True)
+
+    @property
+    def is_noun(self):
+        return self.word_type == WORD_TYPE_NOUN
+
+    @property
+    def is_verb(self):
+        return self.word_type == WORD_TYPE_VERB
+
+    def get_absolute_url(self):
+        return '/word/%s/' % self.word
 
 
 class Noun(Word):
@@ -23,6 +39,30 @@ class Noun(Word):
     indefinite_article = models.IntegerField(null=True, blank=True, choices=INDEFINITE_ARTICLE_CHOICES)
     plural = models.CharField(max_length=255, null=True, blank=True)
     diminutive = models.CharField(max_length=255, null=True, blank=True)
+
+    @property
+    def get_singular(self):
+        article = lookup_value(Noun.DEFINITE_ARTICLE_CHOICES, self.definite_article)
+        return '%s %s' % (article, self.word)
+
+    @property
+    def get_plural(self):
+        if self.plural:
+            return 'de %s' % (self.plural,)
+        else:
+            return '?'
+
+    @property
+    def get_indefinite_singular(self):
+        article = lookup_value(Noun.INDEFINITE_ARTICLE_CHOICES, self.definite_article)
+        return '%s %s' % (article, self.word)
+
+    @property
+    def get_indefinite_plural(self):
+        if self.plural:
+            return self.plural
+        else:
+            return '?'
 
 
 class Verb(Word):
