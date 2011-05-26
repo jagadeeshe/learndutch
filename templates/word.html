@@ -1,5 +1,6 @@
 {% extends "master.html" %}
 {% block content %}
+<div class="mll">
     {% if object.is_noun %}
         {% include "noun.html" with noun=object.noun %}
     {% endif %}
@@ -8,5 +9,6 @@
     {% endif %}
     <p class="pbl">Examples:</p>
     {% include "sentence_list.html" with sentence_list=sentence_list %}
+</div>
     {% include "sentence_form.html" with form=setence_form %}
 {% endblock %}

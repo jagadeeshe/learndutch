@@ -1,1 +1,26 @@
-<strong>{{ noun.get_singular }}</strong>
+<p><h4><strong>{{ noun.get_singular }}</strong></h4> {{ noun.get_meaning }}</p>
+{% if noun.info %}
+    <p>{{ noun.info }}</p>
+{% endif %}
+<table class="noun-table mbl">
+<tr>
+    <td class="bbb">&nbsp;</td>
+    <td class="bbb">singular</td>
+    <td class="bbb">plural</td>
+</tr>
+<tr>
+    <td>definite:</td>
+    <td><h4><strong>{{ noun.get_singular }}</strong></h4></td>
+    <td><h4>{{ noun.get_plural }}</h4></td>
+</tr>
+<tr>
+    <td>indefinite:</td>
+    <td><h4>{{ noun.get_indefinite_singular }}</h4></td>
+    <td><h4>{{ noun.get_indefinite_plural }}</h4></td>
+</tr>
+<tr>
+    <td class="bbb">diminutive:</td>
+    <td class="bbb"><h4>{{ noun.get_diminutive }}</h4></td>
+    <td class="bbb">&nbsp;</td>
+</tr>
+</table>

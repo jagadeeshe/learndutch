@@ -12,7 +12,7 @@ def get_formatted(value, format, ifnone='?'):
     if value:
         return format % value
     else:
-        ifnone
+        return ifnone
 
 class Word(models.Model):
     word_type = models.IntegerField(blank=True)
@@ -27,6 +27,9 @@ class Word(models.Model):
     @property
     def is_verb(self):
         return self.word_type == WORD_TYPE_VERB
+
+    def get_meaning(self):
+        return get_formatted(self.meaning, '- %s', '')
 
     def get_absolute_url(self):
         return '/word/%s/' % self.word
@@ -57,7 +60,7 @@ class Noun(Word):
 
     @property
     def get_indefinite_singular(self):
-        article = lookup_value(Noun.INDEFINITE_ARTICLE_CHOICES, self.definite_article)
+        article = lookup_value(Noun.INDEFINITE_ARTICLE_CHOICES, self.indefinite_article)
         return '%s %s' % (article, self.word)
 
     @property

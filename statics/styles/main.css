@@ -26,8 +26,11 @@ input[type='text'] { width: 175px; }
 
 .bbo { border-bottom: 1px solid orange; }
 
+.bbb { border-bottom: 1px solid gray; }
+
 .mtl { margin-top: 12px; }
 .mbl { margin-bottom: 12px; }
+.mll { margin-left: 12px; }
 
 .pm { padding: 6px; }
 .pll { padding-left: 12px; }
@@ -58,3 +61,9 @@ form label { float: left; width: 140px; }
 #word-input { width: 225px;}
 
 .item-list li { padding-bottom: 6px; }
+
+ul.bullet-list { list-style: circle inside;}
+
+.noun-table { width: 350px; }
+.noun-table td { padding: 3px; }
+

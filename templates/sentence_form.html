@@ -1,7 +1,9 @@
 <form action="{% url add-sentence %}" method="post" id="sentence-frm">{% csrf_token %}
     <div style="display:none;">{{ form.ref_word_id }}</div>
+    <p class="mbl"><label>New {{ form.sentence.label|lower }}:</label></p>
     <div id="setence-feedback"></div>
     {{ form.non_field_errors }}
-    <p class="mbl bbo">{{ form.sentence.errors }} <label for="id_sentence">{{ form.sentence.label }}:</label> {{ form.sentence }} </p>
+    {{ form.sentence.errors }}
+    <p>{{ form.sentence }}</p>
     <input type="submit" value="Submit" />
 </form>

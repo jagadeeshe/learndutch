@@ -12,7 +12,7 @@ class NounForm(ModelForm):
         model = Noun
         widgets = {
             'word_type': HiddenInput(),
-            'info': Textarea(attrs={'cols': 40, 'rows': 5}),
+            'info': Textarea(attrs={'cols': 50, 'rows': 5}),
             'definite_article': RadioSelect(),
             'indefinite_article': RadioSelect(),
         }
@@ -22,14 +22,14 @@ class VerbForm(ModelForm):
         model = Verb
         widgets = {
             'word_type': HiddenInput(),
-            'info': Textarea(attrs={'cols': 40, 'rows': 5}),
+            'info': Textarea(attrs={'cols': 50, 'rows': 5}),
             'past_perfect_aux': RadioSelect(),
         }
 
 
 class SentenceForm(forms.Form):
     ref_word_id = forms.IntegerField(widget=HiddenInput)
-    sentence = forms.CharField(max_length=1024, widget=Textarea(attrs={'cols': 40, 'rows': 5}))
+    sentence = forms.CharField(max_length=1024, widget=Textarea(attrs={'cols': 50, 'rows': 5}))
 
     def save(self):
         s = Sentence()
