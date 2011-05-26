@@ -6,4 +6,7 @@
     {% if object.is_verb %}
         {% include "verb.html" with verb=object.verb %}
     {% endif %}
+    <p class="pbl">Examples:</p>
+    {% include "sentence_list.html" with sentence_list=sentence_list %}
+    {% include "sentence_form.html" with form=setence_form %}
 {% endblock %}

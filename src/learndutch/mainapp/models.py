@@ -8,6 +8,12 @@ def lookup_value(choices, key, default='?'):
         if k == key: return v
     return default
 
+def get_formatted(value, format, ifnone='?'):
+    if value:
+        return format % value
+    else:
+        ifnone
+
 class Word(models.Model):
     word_type = models.IntegerField(blank=True)
     word = models.CharField(max_length=255, unique=True)
@@ -47,10 +53,7 @@ class Noun(Word):
 
     @property
     def get_plural(self):
-        if self.plural:
-            return 'de %s' % (self.plural,)
-        else:
-            return '?'
+        return get_formatted(self.plural, 'de %s')
 
     @property
     def get_indefinite_singular(self):
@@ -59,10 +62,11 @@ class Noun(Word):
 
     @property
     def get_indefinite_plural(self):
-        if self.plural:
-            return self.plural
-        else:
-            return '?'
+        return get_formatted(self.plural, '%s')
+
+    @property
+    def get_diminutive(self):
+        return get_formatted(self.diminutive, 'het %s')
 
 
 class Verb(Word):
@@ -83,7 +87,7 @@ class Verb(Word):
 
 class Sentence(models.Model):
     ref_word = models.ForeignKey(Word)
-    sentence = models.CharField(max_length=1024)
+    sentence = models.CharField(max_length=1024, blank=True)
 
 
 class Tag(models.Model):

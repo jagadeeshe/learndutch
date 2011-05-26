@@ -1,10 +1,9 @@
-from django.shortcuts import render_to_response, redirect
-from django.core.context_processors import csrf
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.views.generic import CreateView, ListView, UpdateView, View
+from django.http import HttpResponse
 
-from forms import NounForm, VerbForm
-from models import Word, Noun, Verb, WORD_TYPE_NOUN, WORD_TYPE_VERB
-
+from forms import NounForm, VerbForm, SentenceForm
+from models import Word, Sentence, WORD_TYPE_NOUN, WORD_TYPE_VERB
+from learndutch.mainapp.utils import CustomDetailView
 
 class CreateNounView(CreateView):
     form_class = NounForm
@@ -20,10 +19,23 @@ class CreateVerbView(CreateView):
     initial = {'word_type': WORD_TYPE_VERB}
 
 
-class WordView(DetailView):
+class WordView(CustomDetailView):
     template_name = "word.html"
     slug_field = "word"
     model = Word
+
+    def get_extra_context_data(self):
+        return {"setence_form": self.create_sentence_form(),
+                "sentence_list": self.get_SentenceList()}
+
+    def create_sentence_form(self):
+        form = SentenceForm(initial={'ref_word_id': self.object.id})
+        return form
+
+    def get_SentenceList(self):
+        q1 = Sentence.objects.filter(ref_word=self.object)
+        return q1
+
 
 
 class UpdateWordView(UpdateView):
@@ -47,3 +59,13 @@ class WordListView(ListView):
     template_name = "word_list.html"
     paginate_by = 15
 
+
+class CreateSentenceView(View):
+
+    def post(self, request, *args, **kwargs):
+        form = SentenceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse("done")
+        else:
+            return HttpResponse("error")

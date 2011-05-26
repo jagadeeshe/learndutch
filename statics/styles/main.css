@@ -32,6 +32,7 @@ input[type='text'] { width: 175px; }
 .pm { padding: 6px; }
 .pll { padding-left: 12px; }
 .ptl { padding-top: 12px; }
+.pbl { padding-bottom: 12px; }
 
  #site-hdr { height: 90px; }
  

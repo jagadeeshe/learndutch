@@ -29,3 +29,41 @@ var WordSearch = (function() {
 		"init": init
 	};
 })();
+
+var SetenceForm = (function(){
+	var viewIds = {
+		formId: '#sentence-frm',
+		wordId: '#id_ref_word_id',
+		feedbackId: '#setence-feedback'
+	};
+	
+	var init = function() {
+		attachHandlers();
+	};
+	
+	var attachHandlers = function() {
+		if ($(viewIds.formId)) { 
+			$(viewIds.formId).submit(submitForm);
+		}
+	};
+	
+	var submitForm = function(event) {
+		event.preventDefault(); 
+
+	    var form = $( this );
+	    var url = form.attr( 'action' );
+	    var sentence = form.find('textarea[name="sentence"]').val();
+	    var wordId = form.find('input[name="ref_word_id"]').val();
+	    var token = form.find('input[name="csrfmiddlewaretoken"]').val();
+
+	    /* Send the data using post and put the results in a div */
+	    $.post( url, { csrfmiddlewaretoken: token, ref_word_id: wordId, sentence: sentence})
+	    .success( function( data ) {
+	    	$(viewIds.feedbackId).html(data);
+	    });
+	};
+	
+	return {
+		"init": init
+	}
+})();
