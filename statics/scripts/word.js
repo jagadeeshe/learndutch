@@ -1,25 +1,16 @@
 
 var WordSearch = (function() {
-    var viewIds = {
-        inputId: "#word-input",
-        searchId: "#search",
-        formId: "#search-frm"
-    };
+    var inputId = "#word-input";
+    var searchId = "#search";
+    var formId = "#search-frm";
 
     var init = function() {
-        attachHandlers();
-    };
-
-    var attachHandlers = function() {
-        $(viewIds.searchId).click(doSearch);
-        $(viewIds.inputId).keypress(function(event) {
-            if(event.keyCode == '13') { doSearch(); }
-        });
-        $(viewIds.formId).submit(function(){ return false;});
+        $(searchId).click(doSearch);
+        $(formId).submit(function(){ doSearch(); return false; });
     };
 
     var doSearch = function() {
-        var word = $(viewIds.inputId).val();
+        var word = $(inputId).val();
         word = escape(word);
         if (word == '') { return; }
         window.location.pathname = "/word/" + word + "/";
@@ -31,36 +22,24 @@ var WordSearch = (function() {
 })();
 
 
-var SetenceForm = (function(){
-    var viewIds = {
-        formId: '#sentence-frm',
-        wordId: '#id_ref_word_id',
-        feedbackId: '#setence-feedback'
-    };
+var SentenceForm = (function(){
+    var formId = '#sentence-frm';
+    var feedbackId = '#setence-feedback';
 
     var init = function() {
-        attachHandlers();
-    };
-
-    var attachHandlers = function() {
-        if ($(viewIds.formId)) { 
-            $(viewIds.formId).submit(submitForm);
+        if ($(formId)) { 
+            $(formId).submit(submitForm);
         }
     };
 
-    var submitForm = function(event) {
-        event.preventDefault(); 
+    var submitForm = function() {
+        var options = { 'success': formResponse };
+        $(this).ajaxSubmit(options);
+        return false;
+    };
 
-        var form = $( this );
-        var url = form.attr( 'action' );
-        var sentence = form.find('textarea[name="sentence"]').val();
-        var wordId = form.find('input[name="ref_word_id"]').val();
-        var token = form.find('input[name="csrfmiddlewaretoken"]').val();
-
-        $.post( url, { csrfmiddlewaretoken: token, ref_word_id: wordId, sentence: sentence})
-        .success( function( data ) {
-            $(viewIds.feedbackId).html(data);
-        });
+    var formResponse = function(responseText) {
+        $(feedbackId).html(responseText);
     };
 
     return {
