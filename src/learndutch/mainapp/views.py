@@ -3,7 +3,7 @@ from django.http import HttpResponse
 
 from forms import NounForm, VerbForm, SentenceForm
 from models import Word, Sentence, WORD_TYPE_NOUN, WORD_TYPE_VERB
-from learndutch.mainapp.utils import CustomDetailView
+from learndutch.mainapp.utils import CustomDetailView, JSONResponseMixin
 
 class CreateNounView(CreateView):
     form_class = NounForm
@@ -60,12 +60,12 @@ class WordListView(ListView):
     paginate_by = 15
 
 
-class CreateSentenceView(View):
+class CreateSentenceView(JSONResponseMixin, View):
 
     def post(self, request, *args, **kwargs):
         form = SentenceForm(request.POST)
         if form.is_valid():
-            form.save()
-            return HttpResponse("done")
+            sentence = form.save()
+            return self.render_success("done", sentence.sentence)
         else:
-            return HttpResponse("error")
+            return self.render_error("unknown error")

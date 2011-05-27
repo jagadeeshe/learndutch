@@ -21,10 +21,21 @@ var WordSearch = (function() {
     };
 })();
 
+var SentenceListView = function(viewLocator) {
+
+    var addItem = function(text) {
+        $.tmpl("<li>${text}</li>", {'text':text}).appendTo(viewLocator);
+    };
+
+    return {
+        "addItem": addItem
+    };
+};
 
 var SentenceForm = (function(){
     var formId = '#sentence-frm';
     var feedbackId = '#setence-feedback';
+    var view = SentenceListView('.sentence-list');
 
     var init = function() {
         if ($(formId)) { 
@@ -38,8 +49,14 @@ var SentenceForm = (function(){
         return false;
     };
 
-    var formResponse = function(responseText) {
-        $(feedbackId).html(responseText);
+    var formResponse = function(data) {
+        if (data.success) {
+            view.addItem(data.result);
+            $(formId).find('textarea[name=sentence]').val('');
+            $(formId).find('textarea[name=sentence]').focus();
+        } else {
+            $(feedbackId).html(data.message[0]);
+        }
     };
 
     return {
