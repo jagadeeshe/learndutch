@@ -63,3 +63,32 @@ var SentenceForm = (function(){
         "init": init
     }
 })();
+
+
+var TagForm = (function(){
+    var addTagId = ".action-add-tag";
+    var formId = "#tag-frm";
+    var formContainerId = ".tag-form";
+
+    var init = function() {
+        if (!$(addTagId)) { return; }
+        $(addTagId).click(addClickHandler);
+        $(formId).submit(handlePost);
+    };
+
+    var addClickHandler = function() {
+        $(formContainerId).show();
+    };
+
+    var handlePost = function() {
+        $(formId).ajaxSubmit({'success': formResponse});
+        return false;
+    };
+
+    var formResponse = function(data) {
+    };
+
+    return {
+        "init": init
+    };
+})();

@@ -34,6 +34,8 @@ class Word(models.Model):
     def get_absolute_url(self):
         return '/word/%s/' % self.word
 
+    def get_word(self):
+        return self.word
 
 class Noun(Word):
     DEFINITE_ARTICLE_CHOICES = (
@@ -71,6 +73,9 @@ class Noun(Word):
     def get_diminutive(self):
         return get_formatted(self.diminutive, 'het %s')
 
+    def get_word(self):
+        return self.get_singular()
+
 
 class Verb(Word):
     PAST_PERFECT_AUX_CHOICES = (
@@ -88,16 +93,19 @@ class Verb(Word):
     past_perfect = models.CharField(max_length=255, null=True, blank=True)
 
 
+
 class Sentence(models.Model):
     ref_word = models.ForeignKey(Word)
     sentence = models.CharField(max_length=1024, blank=True)
 
 
 class Tag(models.Model):
-    name = models.CharField(max_length=75)
+    name = models.CharField(max_length=75, unique=True)
 
 
 class TagObject(models.Model):
     tag_name = models.ForeignKey(Tag)
     object_name = models.ForeignKey(Word)
-
+    
+    class Meta:
+        unique_together = ("tag_name", "object_name")

@@ -1,0 +1,4 @@
+<form id="tag-frm" action="{% url add-tag %}" method="post">{% csrf_token %}
+    {{ form.object_id }}
+    {{ form.name }}
+</form>

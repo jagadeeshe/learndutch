@@ -67,3 +67,8 @@ ul.bullet-list { list-style: circle inside;}
 .noun-table { width: 350px; }
 .noun-table td { padding: 3px; }
 
+.tag-form { display: inline; }
+    .tag-form form { margin: 0; display: inline; }
+    .tag-form input { width: 100px; }
+
+.dim-action { color: #0077aa; }
