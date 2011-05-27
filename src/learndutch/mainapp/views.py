@@ -77,8 +77,8 @@ class CreateSentenceView(JSONResponseMixin, View):
 
 class CreateTagView(JSONResponseMixin, View):
     def post(self, request, *args, **kwargs):
-        return self.render_success("done")
         tag_form = TagForm(request.POST)
+        tag_form.is_valid()
         tagname = tag_form.cleaned_data['name']
         tag_count = Tag.objects.filter(name=tagname).count()
         if tag_count == 0:
@@ -87,5 +87,6 @@ class CreateTagView(JSONResponseMixin, View):
             tag = Tag.objects.get(name=tagname)
         tagobjectdata = {'tag_id': tag.id, 'object_id': tag_form.cleaned_data['object_id']}
         tagobject_form = TagObjectForm(tagobjectdata)
+        tagobject_form.is_valid()
         tagobject_form.save()
         return self.render_success('done')
