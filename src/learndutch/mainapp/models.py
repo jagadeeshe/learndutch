@@ -102,6 +102,9 @@ class Sentence(models.Model):
 class Tag(models.Model):
     name = models.CharField(max_length=75, unique=True)
 
+    def get_absolute_url(self):
+        return '/tag/%s/' % self.name
+
 
 class TagObject(models.Model):
     tag_name = models.ForeignKey(Tag)

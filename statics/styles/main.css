@@ -54,6 +54,8 @@ form label { float: left; width: 140px; }
 
 .row-list ul { display: inline-block; }
 .row-list li { float: left; }
+.row-list li a { padding-right: 6px }
+.row-list li span { padding-right: 6px; }
 .label-ws li label { width: 90px; }
 
 

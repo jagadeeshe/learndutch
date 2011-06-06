@@ -2,7 +2,8 @@
 {% block content %}
 <div class="mll">
     <p><h4><strong>{{ object.get_word }}</strong></h4> {{ object.get_meaning }}</p>
-    <!-- tag list --> <a href="javascript:void(0);" class="action-add-tag dim-action">tag</a>
+    {% include "tag_list.html" with tag_list=tag_list %}
+    <a href="javascript:void(0);" class="action-add-tag dim-action">tag</a>
     <div class="tag-form" style="display:none;">
         {% include "tag_form.html" with form=tag_form %}
     </div>
@@ -19,5 +20,4 @@
     {% include "sentence_list.html" with sentence_list=sentence_list %}
 </div>
     {% include "sentence_form.html" with form=setence_form %}
-
 {% endblock %}

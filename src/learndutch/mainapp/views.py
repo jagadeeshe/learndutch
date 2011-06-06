@@ -2,7 +2,7 @@ from django.views.generic import CreateView, ListView, UpdateView, View
 from django.http import HttpResponse
 
 from forms import NounForm, VerbForm, SentenceForm, TagForm, TagObjectForm
-from models import Word, Sentence, Tag, WORD_TYPE_NOUN, WORD_TYPE_VERB
+from models import Word, Sentence, Tag, WORD_TYPE_NOUN, WORD_TYPE_VERB, TagObject
 from learndutch.mainapp.utils import CustomDetailView, JSONResponseMixin
 
 class CreateNounView(CreateView):
@@ -27,7 +27,8 @@ class WordView(CustomDetailView):
     def get_extra_context_data(self):
         return {"setence_form": self.create_sentence_form(),
                 "sentence_list": self.get_SentenceList(),
-                "tag_form": self.create_tag_form()}
+                "tag_form": self.create_tag_form(),
+                "tag_list": self.get_tag_list()}
 
     def create_sentence_form(self):
         form = SentenceForm(initial={'ref_word_id': self.object.id})
@@ -40,6 +41,11 @@ class WordView(CustomDetailView):
     def create_tag_form(self):
         form = TagForm(initial={'object_id': self.object.id})
         return form
+
+    def get_tag_list(self):
+        q1 = TagObject.objects.filter(object_name=self.object)
+        result = [ tagobj.tag_name for tagobj in q1]
+        return result
 
 
 
@@ -90,3 +96,4 @@ class CreateTagView(JSONResponseMixin, View):
         tagobject_form.is_valid()
         tagobject_form.save()
         return self.render_success('done')
+
