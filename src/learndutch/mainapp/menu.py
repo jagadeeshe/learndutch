@@ -8,5 +8,6 @@ main_menu = (
     ('Home', '/'),
     ('Add noun', '/add-noun/'),
     ('Add verb', '/add-verb/'),
+    ('Add word', '/add-word/'),
     ('All words', '/words/')
 )

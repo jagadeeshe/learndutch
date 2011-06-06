@@ -2,6 +2,7 @@ from django.db import models
 
 WORD_TYPE_NOUN = 1
 WORD_TYPE_VERB = 2
+WORD_TYPE_PLAIN = 3
 
 def lookup_value(choices, key, default='?'):
     for k, v in choices:

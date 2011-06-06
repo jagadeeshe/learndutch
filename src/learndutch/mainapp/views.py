@@ -1,8 +1,8 @@
 from django.views.generic import CreateView, ListView, UpdateView, View
 from django.http import HttpResponse
 
-from forms import NounForm, VerbForm, SentenceForm, TagForm, TagObjectForm
-from models import Word, Sentence, Tag, WORD_TYPE_NOUN, WORD_TYPE_VERB, TagObject
+from forms import NounForm, VerbForm, SentenceForm, TagForm, TagObjectForm, WordForm
+from models import Word, Sentence, Tag, WORD_TYPE_NOUN, WORD_TYPE_VERB, TagObject, WORD_TYPE_PLAIN
 from learndutch.mainapp.utils import CustomDetailView, JSONResponseMixin
 
 class CreateNounView(CreateView):
@@ -17,6 +17,13 @@ class CreateVerbView(CreateView):
     template_name = "verb_form.html"
     success_url = "/add-verb/"
     initial = {'word_type': WORD_TYPE_VERB}
+
+
+class CreateWordView(CreateView):
+    form_class = WordForm
+    template_name = "word_form.html"
+    success_url = "/add-word/"
+    initial = {'word_type': WORD_TYPE_PLAIN}
 
 
 class WordView(CustomDetailView):

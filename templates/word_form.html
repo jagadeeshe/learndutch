@@ -1,0 +1,11 @@
+{% extends "master.html" %}
+{% block content %}
+<form action="{% url add-word %}" method="post">{% csrf_token %}
+    {{ form.non_field_errors }}
+    <div style="display:none"">{{ form.word_type }}</div>
+    <p>{{ form.word.errors }} <label for="id_word">{{ form.word.label }}:</label> {{ form.word }} </p>
+    <p>{{ form.meaning.errors }} <label for="id_meaning">Meaning:</label> {{ form.meaning }} </p>
+    <p class="mbl bbo">{{ form.info.errors }} <label for="id_info">{{ form.info.label }}:</label> {{ form.info }} </p>
+    <input type="submit" value="Submit" />
+</form>
+{% endblock %}
