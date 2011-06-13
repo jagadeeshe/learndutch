@@ -105,7 +105,7 @@ class Verb(Word):
 
 class Sentence(models.Model):
     ref_word = models.ForeignKey(Word)
-    sentence = models.CharField(max_length=1024, blank=True)
+    sentence = models.CharField(max_length=10240, blank=True)
 
 
 class Tag(models.Model):
