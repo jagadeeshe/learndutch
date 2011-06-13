@@ -2,7 +2,7 @@
 {% block content %}
 <ul class='item-list'>
     {% for word in object_list %}
-        <li><h4><a href="/word/{{ word.word }}/">{{ word.word }}</a></h4>{{ word.get_meaning }}</li>
+        <li><h4><a href="{{ word.get_absolute_url }}">{{ word.word }}</a></h4>{{ word.get_meaning }}</li>
     {% endfor %}
 </ul>
 {% include "components/default_pager.html" %}

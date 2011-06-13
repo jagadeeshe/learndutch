@@ -73,7 +73,7 @@ class UpdateWordView(UpdateView):
 
 
 class WordListView(ListView):
-    model = Word
+    queryset = Word.objects.extra(order_by=['word'])
     template_name = "word_list.html"
     paginate_by = 15
 

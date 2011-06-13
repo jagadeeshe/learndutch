@@ -6,6 +6,7 @@ WORD_TYPE_PLAIN = 3
 
 def lookup_value(choices, key, default='?'):
     for k, v in choices:
+        if k == key and v == '/': return ''
         if k == key: return v
     return default
 
@@ -35,6 +36,9 @@ class Word(models.Model):
     def get_absolute_url(self):
         return '/word/%s/' % self.word
 
+    def get_edit_url(self):
+        return self.get_absolute_url() + "edit/"
+
     def get_word(self):
         return self.word
 
@@ -42,6 +46,7 @@ class Noun(Word):
     DEFINITE_ARTICLE_CHOICES = (
         (1, 'de'),
         (2, 'het'),
+        (3, '/'),
     )
     INDEFINITE_ARTICLE_CHOICES = (
         (1, 'een'),
@@ -59,7 +64,10 @@ class Noun(Word):
 
     @property
     def get_plural(self):
-        return get_formatted(self.plural, 'de %s')
+        if self.definite_article == 3:
+            return self.plural
+        else:
+            return get_formatted(self.plural, 'de %s')
 
     @property
     def get_indefinite_singular(self):

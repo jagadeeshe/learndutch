@@ -1,7 +1,7 @@
 {% extends "master.html" %}
 {% block content %}
 <div class="mll">
-    <p><h4><strong>{{ object.get_word }}</strong></h4> {{ object.get_meaning }}</p>
+    <p><h4><strong>{{ object.get_word }}</strong></h4> <a href="{{ object.get_edit_url }}" class="dim-action">edit</a> {{ object.get_meaning }}</p>
     {% include "tag_list.html" with tag_list=tag_list %}
     <a href="javascript:void(0);" class="action-add-tag dim-action">tag</a>
     <div class="tag-form" style="display:none;">
