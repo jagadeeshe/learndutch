@@ -63,8 +63,10 @@ form label { float: left; width: 140px; }
 #word-input { width: 225px;}
 
 .item-list li { padding-bottom: 6px; }
+.w500 { width: 500px;}
 
-ul.bullet-list { list-style: circle inside;}
+ul.bullet-list { list-style: circle outside; }
+ul.bullet-list li { margin-left: 20px; }
 
 .noun-table { width: 350px; }
 .noun-table td { padding: 3px; }
