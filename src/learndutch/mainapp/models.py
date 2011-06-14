@@ -121,3 +121,14 @@ class TagObject(models.Model):
     
     class Meta:
         unique_together = ("tag_name", "object_name")
+
+
+class Page(models.Model):
+    name = models.CharField(max_length=512, unique=True)
+    content = models.CharField(max_length=10240)
+    
+    def get_absolute_url(self):
+        return "/page/%s/" % self.name
+    
+    def get_edit_url(self):
+        return self.get_absolute_url() + "edit/"

@@ -1,8 +1,8 @@
-from django.views.generic import CreateView, ListView, UpdateView, View
+from django.views.generic import CreateView, ListView, UpdateView, View, DetailView
 from django.http import HttpResponse
 
-from forms import NounForm, VerbForm, SentenceForm, TagForm, TagObjectForm, WordForm
-from models import Word, Sentence, Tag, WORD_TYPE_NOUN, WORD_TYPE_VERB, TagObject, WORD_TYPE_PLAIN
+from forms import NounForm, VerbForm, SentenceForm, TagForm, TagObjectForm, WordForm, PageForm
+from models import Word, Sentence, Tag, WORD_TYPE_NOUN, WORD_TYPE_VERB, TagObject, WORD_TYPE_PLAIN, Page
 from learndutch.mainapp.utils import CustomDetailView, JSONResponseMixin
 
 class CreateNounView(CreateView):
@@ -103,4 +103,21 @@ class CreateTagView(JSONResponseMixin, View):
         tagobject_form.is_valid()
         tagobject_form.save()
         return self.render_success('done')
+
+
+class CreatePageView(CreateView):
+    form_class = PageForm
+    template_name = "page_form.html"
+
+
+class PageView(DetailView):
+    template_name = "page.html"
+    slug_field = "name"
+    model = Page
+
+
+class UpdatePageView(UpdateView):
+    slug_field = 'name'
+    model = Page
+    template_name = "page_form.html"
 

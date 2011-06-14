@@ -1,0 +1,14 @@
+{% extends "master.html" %}
+{% block content %}
+{% if object %}
+<form action="{{ object.get_edit_url }}" method="post">
+{% else %}
+<form action="{% url add-page %}" method="post">
+{% endif %}
+{% csrf_token %}
+    {{ form.non_field_errors }}
+    <p>{{ form.name.errors }} <label for="id_name">{{ form.name.label }}:</label> {{ form.name }} </p>
+    <p>{{ form.content.errors }} {{ form.content }} </p>
+    <input type="submit" value="Submit" />
+</form>
+{% endblock %}

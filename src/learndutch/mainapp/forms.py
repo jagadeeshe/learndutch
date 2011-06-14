@@ -4,7 +4,7 @@ Created on May 18, 2011
 @author: jagadeesh
 '''
 from django.forms import  ModelForm, Textarea, RadioSelect, HiddenInput
-from models import Noun, Verb, Sentence, Tag, TagObject, Word
+from models import Noun, Verb, Sentence, Tag, TagObject, Word, Page
 from django import forms
 
 class NounForm(ModelForm):
@@ -69,3 +69,10 @@ class TagObjectForm(forms.Form):
         to.object_name_id = self.cleaned_data['object_id']
         to.save()
         return to
+
+class PageForm(ModelForm):
+    class Meta:
+        model = Page
+        widgets = {
+            'content': Textarea(attrs={'cols': 92, 'rows': 15}),
+        }
