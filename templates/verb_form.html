@@ -1,6 +1,11 @@
 {% extends "master.html" %}
 {% block content %}
-<form action="{% url add-verb %}" method="post">{% csrf_token %}
+{% if object %}
+<form action="{{ object.get_edit_url }}" method="post">
+{% else %}
+<form action="{% url add-verb %}" method="post">
+{% endif %}
+{% csrf_token %}
     {{ form.non_field_errors }}
     <div style="display:none"">{{ form.word_type }}</div>
     <p>{{ form.word.errors }} <label for="id_word">{{ form.word.label }}:</label> {{ form.word }} </p>
