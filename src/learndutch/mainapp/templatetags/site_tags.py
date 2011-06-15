@@ -13,3 +13,10 @@ def main_menu():
     return {"menu_items": items}
 
 register.inclusion_tag('components/main_menu.html')(main_menu)
+
+
+def textile(context, value):
+    from learndutch import textile
+    return textile.textile(value)
+
+register.simple_tag(takes_context=True)(textile)
