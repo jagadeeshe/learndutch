@@ -1,8 +1,8 @@
 {% extends "master.html" %}
 {% block content %}
 {% load site_tags %}
-<div class="mll">
+<div class='textile'>
     <p>{{ object.name }}</p>
-    {% textile object.content %}
+    {{ object.content|textile }}
 </div>
 {% endblock %}

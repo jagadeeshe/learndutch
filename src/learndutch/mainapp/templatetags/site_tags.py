@@ -5,6 +5,7 @@ Created on May 18, 2011
 '''
 from django import template
 from learndutch.mainapp import menu
+from django.utils.safestring import mark_safe
 
 register = template.Library()
 
@@ -15,8 +16,9 @@ def main_menu():
 register.inclusion_tag('components/main_menu.html')(main_menu)
 
 
-def textile(context, value):
+@register.filter
+def textile(value):
     from learndutch import textile
-    return textile.textile(value)
+    result = textile.textile(value)
+    return mark_safe(result)
 
-register.simple_tag(takes_context=True)(textile)
