@@ -1,4 +1,8 @@
+<a href="javascript:void(0);" class="action-add-tag dim-action">tag</a>
+<div class="tag-frm-ctr" style="display:none;">
+<div id="tag-feedback"></div>
 <form id="tag-frm" action="{% url add-tag %}" method="post">{% csrf_token %}
     {{ form.object_id }}
     {{ form.name }}
 </form>
+</div>

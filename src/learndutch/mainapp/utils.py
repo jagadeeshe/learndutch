@@ -49,11 +49,11 @@ class JSONResponseMixin(object):
         return json.dumps(context)
 
     def render_success(self, message, result=''):
-        context = {'success': True, 'message': [message], 'result': result}
+        context = {'success': True, 'messages': [message], 'result': result}
         return self.render_to_response(context)
 
     def render_error(self, message):
         if type(message) == str:
             message = [message]
-        context = {'success': True, 'message': [message], 'result': {}}
+        context = {'success': False, 'messages': [message], 'result': {}}
         return self.render_to_response(context)

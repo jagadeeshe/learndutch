@@ -102,7 +102,7 @@ class CreateTagView(JSONResponseMixin, View):
         tagobject_form = TagObjectForm(tagobjectdata)
         tagobject_form.is_valid()
         tagobject_form.save()
-        return self.render_success('done')
+        return self.render_success('done', {'tag':tagname, 'url': tag.get_absolute_url()})
 
 
 class CreatePageView(CreateView):

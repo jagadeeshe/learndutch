@@ -21,42 +21,82 @@ var WordSearch = (function() {
     };
 })();
 
+/**
+ * 
+ * @param formId  - formId to which ajax submit is attached
+ * @param options - map containing
+ * {
+ *  'success': array of callbacks called with result
+ *  'error': callback when called with error message
+ * }
+ * 
+ */
+var FormController = function(formId, options) {
+
+    var defaults = {
+            success: [],
+            error: function() {}
+    };
+
+    var formResponse = function(data) {
+        if (data.success) {
+            for(var i=0; i<options.success.length; i++) {
+                var  cb = options.success[i];
+                cb(data.result);
+            }
+        } else {
+            options.error(data.messages);
+        }
+    };
+
+    var submitHandler = function () {
+        var options = {'success': formResponse};
+        $(this).ajaxSubmit(options);
+        return false;
+    };
+
+    /*for (var name in defaults) {
+        if (options[name] == 'undefined') {
+            options[name] = defaults[name];
+        }
+    }*/
+    //if (typeof options.success ==) TODO: type check
+    $(formId).submit(submitHandler);
+}
+
 var SentenceListView = function(viewLocator) {
 
     var addItem = function(text) {
         $.tmpl("<li>${text}</li>", {'text':text}).appendTo(viewLocator);
     };
 
+    var removeItem = function() { };
+
     return {
-        "addItem": addItem
+        "addItem": addItem,
+        "removeItem": removeItem
     };
 };
 
 var SentenceForm = (function(){
     var formId = '#sentence-frm';
     var feedbackId = '#setence-feedback';
-    var view = SentenceListView('.sentence-list');
+
+    var success = function(sentence) {
+        SentenceListView('.sentence-list').addItem(sentence);
+        $(formId).find('textarea[name=sentence]').val('');
+        $(formId).find('textarea[name=sentence]').focus();
+    };
+
+    var error = function(messages) {
+        $(feedbackId).html(messages[0]);
+    };
 
     var init = function() {
-        if ($(formId)) { 
-            $(formId).submit(submitForm);
-        }
-    };
-
-    var submitForm = function() {
-        var options = { 'success': formResponse };
-        $(this).ajaxSubmit(options);
-        return false;
-    };
-
-    var formResponse = function(data) {
-        if (data.success) {
-            view.addItem(data.result);
-            $(formId).find('textarea[name=sentence]').val('');
-            $(formId).find('textarea[name=sentence]').focus();
-        } else {
-            $(feedbackId).html(data.message[0]);
-        }
+        FormController(formId, {
+            success: [success],
+            error: error
+        });
     };
 
     return {
@@ -64,28 +104,39 @@ var SentenceForm = (function(){
     }
 })();
 
+var TagListView = function(viewLocator) {
+
+    var addItem = function(tag) {
+        $.tmpl('<li><a href="${url}">${tag}</a></li>', tag).appendTo(viewLocator);
+    };
+
+    var removeItem = function() {};
+
+    return {
+        "addItem": addItem,
+        "removeItem": removeItem
+    };
+};
 
 var TagForm = (function(){
-    var addTagId = ".action-add-tag";
-    var formId = "#tag-frm";
-    var formContainerId = ".tag-form";
+    var formContainerId = ".tag-frm-ctr";
+
+    var success = function(tag) {
+        TagListView('.tag-list').addItem(tag);
+        $(formContainerId).hide();
+    };
+
+    var error = function(messages) {
+        $("#tag-feedback").html(messages[0]);
+    };
 
     var init = function() {
-        if (!$(addTagId)) { return; }
-        $(addTagId).click(addClickHandler);
-        $(formId).submit(handlePost);
-    };
+        $(".action-add-tag").click(function() { $(formContainerId).show(); });
 
-    var addClickHandler = function() {
-        $(formContainerId).show();
-    };
-
-    var handlePost = function() {
-        $(formId).ajaxSubmit({'success': formResponse});
-        return false;
-    };
-
-    var formResponse = function(data) {
+        FormController("#tag-frm", {
+            'success': [success],
+            'error': error
+        });
     };
 
     return {

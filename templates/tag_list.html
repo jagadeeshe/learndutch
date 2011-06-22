@@ -1,6 +1,6 @@
-<ul class="row-list">
+<ul class="row-list tag-list">
     <li><span>Tags:</span></li>
 {% for tag in tag_list %}
-    <li><a href="{{ tag.get_obsolute_url }}">{{ tag.name }}</a></li>
+    <li><a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a></li>
 {% endfor %}
 </ul>
