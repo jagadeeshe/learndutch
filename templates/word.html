@@ -1,7 +1,7 @@
 {% extends "master.html" %}
 {% block content %}
 <div class="mll">
-    <p><h4><strong>{{ object.get_word }}</strong></h4> <a href="{{ object.get_edit_url }}" class="dim-action">edit</a> {{ object.get_meaning }}</p>
+    <p><h4><strong>{{ object.get_word }}</strong></h4> {%if perms.mainapp.edit_word %} <a href="{{ object.get_edit_url }}" class="dim-action">edit</a> {{ object.get_meaning }}</p> {% endif %}
     {% include "tag_list.html" with tag_list=tag_list %}
     {% include "tag_form.html" with form=tag_form %}
     {% if object.info %}

@@ -127,6 +127,12 @@ class Page(models.Model):
     name = models.CharField(max_length=512, unique=True)
     content = models.CharField(max_length=10240)
     
+    class Meta:
+        permissions = (
+            ('view_list', "Can view Page list"),
+            ('view_hidden', "Can view hidden Page"),
+        )
+    
     def get_absolute_url(self):
         return "/page/%s/" % self.name
     

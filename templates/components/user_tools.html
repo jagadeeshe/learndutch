@@ -1,0 +1,10 @@
+{% load url from future %}
+{% if user.is_authenticated %}
+<div id="user-tools">
+    Welcome, <strong>{{ user.username }}</strong> <a href="{% url 'django.contrib.auth.views.logout' %}">Logout</a>
+</div>
+{% else %}
+<div id="user-tools">
+    <a href="{% url 'django.contrib.auth.views.login' %}">Login</a>
+</div>
+{% endif %}

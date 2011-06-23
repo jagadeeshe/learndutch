@@ -11,9 +11,9 @@ a { color: blue; }
 h1 { text-align: center; }
 h4 { font-weight: normal; font-size: 11pt; display:inline; }
 
-input[type='text'], textarea { border: 1px solid gray; padding: 3px; }
+input[type='text'], textarea, input[type='password'] { border: 1px solid gray; padding: 3px; }
 input[type='submit'], input[type='button'] { padding: 3px 12px; }
-input[type='text'] { width: 175px; }
+input[type='text'], input[type='password'] { width: 175px; }
 
 .fll { float: left; }
 .clr { clear: both; }
@@ -76,3 +76,5 @@ ul.bullet-list li { margin-left: 20px; }
     .tag-form input { width: 100px; }
 
 .dim-action { color: #0077aa; }
+
+#user-tools { position: absolute; top: 70px; right:0; }

@@ -1,3 +1,4 @@
+{% if perms.mainapp.add_tag %}
 <a href="javascript:void(0);" class="action-add-tag dim-action">tag</a>
 <div class="tag-frm-ctr" style="display:none;">
 <div id="tag-feedback"></div>
@@ -6,3 +7,4 @@
     {{ form.name }}
 </form>
 </div>
+{% endif %}

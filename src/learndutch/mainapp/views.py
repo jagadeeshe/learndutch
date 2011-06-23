@@ -1,5 +1,7 @@
 from django.views.generic import CreateView, ListView, UpdateView, View, DetailView
 from django.http import HttpResponse
+from django.contrib.auth.decorators import permission_required
+from django.utils.decorators import method_decorator
 
 from forms import NounForm, VerbForm, SentenceForm, TagForm, TagObjectForm, WordForm, PageForm
 from models import Word, Sentence, Tag, WORD_TYPE_NOUN, WORD_TYPE_VERB, TagObject, WORD_TYPE_PLAIN, Page
@@ -11,6 +13,10 @@ class CreateNounView(CreateView):
     success_url = "/add-noun/"
     initial = {'word_type': WORD_TYPE_NOUN}
 
+    @method_decorator(permission_required('mainapp.add_noun'))
+    def dispatch(self, *args, **kwargs):
+        return super(CreateNounView, self).dispatch(*args, **kwargs)
+
 
 class CreateVerbView(CreateView):
     form_class = VerbForm
@@ -18,12 +24,20 @@ class CreateVerbView(CreateView):
     success_url = "/add-verb/"
     initial = {'word_type': WORD_TYPE_VERB}
 
+    @method_decorator(permission_required('mainapp.add_verb'))
+    def dispatch(self, *args, **kwargs):
+        return super(CreateVerbView, self).dispatch(*args, **kwargs)
+
 
 class CreateWordView(CreateView):
     form_class = WordForm
     template_name = "word_form.html"
     success_url = "/add-word/"
     initial = {'word_type': WORD_TYPE_PLAIN}
+
+    @method_decorator(permission_required('mainapp.add_word'))
+    def dispatch(self, *args, **kwargs):
+        return super(CreateWordView, self).dispatch(*args, **kwargs)
 
 
 class WordView(CustomDetailView):
@@ -71,6 +85,10 @@ class UpdateWordView(UpdateView):
             return word.verb
         raise Exception('unknown word type')
 
+    @method_decorator(permission_required('mainapp.edit_word'))
+    def dispatch(self, *args, **kwargs):
+        return super(UpdateWordView, self).dispatch(*args, **kwargs)
+
 
 class WordListView(ListView):
     queryset = Word.objects.extra(order_by=['word'])
@@ -86,6 +104,10 @@ class CreateSentenceView(JSONResponseMixin, View):
             return self.render_success("done", sentence.sentence)
         else:
             return self.render_error("unknown error")
+
+    @method_decorator(permission_required('mainapp.add_sentence'))
+    def dispatch(self, *args, **kwargs):
+        return super(CreateSentenceView, self).dispatch(*args, **kwargs)
 
 
 class CreateTagView(JSONResponseMixin, View):
@@ -104,10 +126,18 @@ class CreateTagView(JSONResponseMixin, View):
         tagobject_form.save()
         return self.render_success('done', {'tag':tagname, 'url': tag.get_absolute_url()})
 
+    @method_decorator(permission_required('mainapp.add_tag'))
+    def dispatch(self, *args, **kwargs):
+        return super(CreateTagView, self).dispatch(*args, **kwargs)
+
 
 class CreatePageView(CreateView):
     form_class = PageForm
     template_name = "page_form.html"
+
+    @method_decorator(permission_required('mainapp.add_page'))
+    def dispatch(self, *args, **kwargs):
+        return super(CreatePageView, self).dispatch(*args, **kwargs)
 
 
 class PageView(DetailView):
@@ -116,8 +146,32 @@ class PageView(DetailView):
     model = Page
 
 
+class HiddenPageView(DetailView):
+    template_name = "page.html"
+    slug_field = "name"
+    model = Page
+
+    @method_decorator(permission_required('mainapp.view_hidden_page'))
+    def dispatch(self, *args, **kwargs):
+        return super(HiddenPageView, self).dispatch(*args, **kwargs)
+
+
 class UpdatePageView(UpdateView):
     slug_field = 'name'
     model = Page
+    form_class = PageForm
     template_name = "page_form.html"
 
+    @method_decorator(permission_required('mainapp.edit_page'))
+    def dispatch(self, *args, **kwargs):
+        return super(UpdatePageView, self).dispatch(*args, **kwargs)
+
+
+class PageListView(ListView):
+    queryset = Page.objects.extra(order_by=['name'])
+    template_name = "page_list.html"
+    paginate_by = 15
+
+    @method_decorator(permission_required('mainapp.view_list_page'))
+    def dispatch(self, *args, **kwargs):
+        return super(PageListView, self).dispatch(*args, **kwargs)

@@ -5,9 +5,11 @@ Created on May 18, 2011
 '''
 
 main_menu = (
-    ('Home', '/'),
-    ('Add noun', '/add-noun/'),
-    ('Add verb', '/add-verb/'),
-    ('Add word', '/add-word/'),
-    ('All words', '/words/')
+    ('Home', '/', None),
+    ('Add noun', '/add-noun/', 'mainapp.add_noun'),
+    ('Add verb', '/add-verb/', 'mainapp.add_verb'),
+    ('Add word', '/add-word/', 'mainapp.add_word'),
+    ('Add page', '/add-page/', 'mainapp.add_page'),
+    ('All words', '/words/', None),
+    ('All pages', '/pages/', 'mainapp.view_list_page'),
 )

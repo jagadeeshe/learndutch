@@ -3,8 +3,8 @@ from django.views.generic import TemplateView
 from learndutch.mainapp.views import *
 
 # Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
@@ -13,11 +13,10 @@ urlpatterns = patterns('',
 
     # Uncomment the admin/doc line below to enable admin documentation:
     # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # url(r'^admin/', include(admin.site.urls)),
     
-    url(r'^$', TemplateView.as_view(template_name="index.html"), name="home"),
+    url(r'^$', PageView.as_view(), kwargs={'slug':'_home'}, name="home"),
+    url(r'^login/$', 'django.contrib.auth.views.login', {'template_name': 'login.html'}),
+    url(r'^logout/$', 'django.contrib.auth.views.logout', {'next_page':'/'}),
     url(r'^add-noun/$', CreateNounView.as_view(), name="add-noun"),
     url(r'^add-verb/$', CreateVerbView.as_view(), name="add-verb"),
     url(r'^add-word/$', CreateWordView.as_view(), name="add-word"),
@@ -27,6 +26,11 @@ urlpatterns = patterns('',
     url(r'^word/(?P<slug>(\w+-?)+)/$', WordView.as_view(), name='search-word'),
     url(r'^word/(?P<slug>(\w+-?)+)/edit/$', UpdateWordView.as_view(), name='update-word'),
     url(r'^words/$', WordListView.as_view(), name="words"),
+    url(r'^page/(?P<slug>(?=_)(\w+-?)+)/$', HiddenPageView.as_view(), name='hidden-page'),
     url(r'^page/(?P<slug>(\w+-?)+)/$', PageView.as_view(), name='page'),
-#    url(r'^page/(?P<slug>(\w+-?)+)/edit/$', '', name='update-page'),
+    url(r'^page/(?P<slug>(\w+-?)+)/edit/$', UpdatePageView.as_view(), name='update-page'),
+    url(r'^pages/$', PageListView.as_view(), name='pages'),
+
+    # Uncomment the next line to enable the admin:
+    url(r'^admin/', include(admin.site.urls)),
 )

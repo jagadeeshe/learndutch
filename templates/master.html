@@ -20,10 +20,11 @@
     <input type="button" name="search" id="search" value="Search"></input>
 </form>
 </div>
+{% include "components/user_tools.html" %}
 </div>
 <div id="site-bdy">
     <div id="menu" class="fll pll ptl">
-        {% main_menu %}
+        {% main_menu user %}
     </div>
     <div id="content" class="blg pll ptl">
         {% block content %}{% endblock %}

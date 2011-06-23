@@ -1,0 +1,9 @@
+{% extends "master.html" %}
+{% block content %}
+<ul class='item-list'>
+    {% for page in object_list %}
+        <li><h4><a href="{{ page.get_absolute_url }}">{{ page.name }}</a></h4></li>
+    {% endfor %}
+</ul>
+{% include "components/default_pager.html" %}
+{% endblock %}

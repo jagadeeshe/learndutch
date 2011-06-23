@@ -1,3 +1,4 @@
+{% if perms.mainapp.add_sentence %}
 <form action="{% url add-sentence %}" method="post" id="sentence-frm">{% csrf_token %}
     <div style="display:none;">{{ form.ref_word_id }}</div>
     <p class="mbl"><label>New {{ form.sentence.label|lower }}:</label></p>
@@ -7,3 +8,4 @@
     <p>{{ form.sentence }}</p>
     <input type="submit" value="Submit" />
 </form>
+{% endif %}
