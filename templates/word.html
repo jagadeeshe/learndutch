@@ -1,7 +1,7 @@
 {% extends "master.html" %}
 {% block content %}
 <div class="mll">
-    <p><h4><strong>{{ object.get_word }}</strong></h4> {%if perms.mainapp.edit_word %} <a href="{{ object.get_edit_url }}" class="dim-action">edit</a> {{ object.get_meaning }}</p> {% endif %}
+    <div class="mbm"><h3><strong>{{ object.get_word }}</strong></h3> {%if perms.mainapp.edit_word %} <a href="{{ object.get_edit_url }}" class="dim-action">edit</a>{% endif %} {{ object.get_meaning }} </div>
     {% include "tag_list.html" with tag_list=tag_list %}
     {% include "tag_form.html" with form=tag_form %}
     {% if object.info %}
@@ -13,7 +13,7 @@
     {% if object.is_verb %}
         {% include "verb.html" with verb=object.verb %}
     {% endif %}
-    <p class="pbl">Examples:</p>
+    <div class="mbm"><strong>Examples:</strong></div>
     {% include "sentence_list.html" with sentence_list=sentence_list %}
 </div>
     {% include "sentence_form.html" with form=setence_form %}

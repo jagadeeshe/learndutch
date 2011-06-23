@@ -1,6 +1,9 @@
+<div class="mbm">
 <ul class="row-list tag-list">
-    <li><span>Tags:</span></li>
+    <li><span><strong>Tags:</strong></span></li>
 {% for tag in tag_list %}
     <li><a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a></li>
 {% endfor %}
 </ul>
+<div class="clr"></div>
+</div>

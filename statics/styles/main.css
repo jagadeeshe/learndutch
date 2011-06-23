@@ -9,6 +9,7 @@ a, a:hover, a:focus { text-decoration: none; }
 a { color: blue; }
 
 h1 { text-align: center; }
+h3 { font-weight: normal; font-size: 13pt; display:inline; }
 h4 { font-weight: normal; font-size: 11pt; display:inline; }
 
 input[type='text'], textarea, input[type='password'] { border: 1px solid gray; padding: 3px; }
@@ -31,6 +32,7 @@ input[type='text'], input[type='password'] { width: 175px; }
 .mtl { margin-top: 12px; }
 .mbl { margin-bottom: 12px; }
 .mll { margin-left: 12px; }
+.mbm { margin-bottom: 6px; }
 
 .pm { padding: 6px; }
 .pll { padding-left: 12px; }
@@ -78,3 +80,6 @@ ul.bullet-list li { margin-left: 20px; }
 .dim-action { color: #0077aa; }
 
 #user-tools { position: absolute; top: 70px; right:0; }
+
+.verb-table { width: 350px; }
+.verb-table td { padding: 3px; }

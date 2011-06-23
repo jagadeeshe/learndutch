@@ -101,6 +101,8 @@ class Verb(Word):
     past_perfect_aux = models.IntegerField(null=True, blank=True, choices=PAST_PERFECT_AUX_CHOICES)
     past_perfect = models.CharField(max_length=255, null=True, blank=True)
 
+    def get_past_perfect_aux(self):
+        return lookup_value(Verb.PAST_PERFECT_AUX_CHOICES, self.past_perfect_aux)
 
 
 class Sentence(models.Model):
