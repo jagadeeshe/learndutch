@@ -21,7 +21,9 @@ class Word(models.Model):
     word = models.CharField(max_length=255, unique=True)
     meaning = models.CharField(max_length=255, null=True, blank=True)
     info = models.CharField(max_length=1024, null=True, blank=True)
-
+    image = models.ImageField(upload_to='word-image', null=True, blank=True)
+    audio = models.FileField(upload_to='word-sound', null=True, blank=True)
+    
     @property
     def is_noun(self):
         return self.word_type == WORD_TYPE_NOUN

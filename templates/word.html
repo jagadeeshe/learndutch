@@ -2,6 +2,11 @@
 {% block content %}
 <div class="mll">
     <div class="mbm"><h3><strong>{{ object.get_word }}</strong></h3> {%if perms.mainapp.edit_word %} <a href="{{ object.get_edit_url }}" class="dim-action">edit</a>{% endif %} {{ object.get_meaning }} </div>
+    {% if object.image %}
+    <div>
+        <img src="{{ object.image.url }}" >
+    </div>
+    {% endif %}
     {% include "tag_list.html" with tag_list=tag_list %}
     {% include "tag_form.html" with form=tag_form %}
     {% if object.info %}

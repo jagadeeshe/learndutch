@@ -1,16 +1,18 @@
 {% extends "master.html" %}
 {% block content %}
 {% if object %}
-<form action="{{ object.get_edit_url }}" method="post">
+<form action="{{ object.get_edit_url }}" method="post" enctype="multipart/form-data">
 {% else %}
-<form action="{% url add-noun %}" method="post">
+<form action="{% url add-noun %}" method="post" enctype="multipart/form-data">
 {% endif %}
 {% csrf_token %}
     {{ form.non_field_errors }}
     <div style="display:none">{{ form.word_type }}</div>
     <p>{{ form.word.errors }} <label for="id_word">{{ form.word.label }}:</label> {{ form.word }} </p>
     <p>{{ form.meaning.errors }} <label for="id_meaning">Meaning:</label> {{ form.meaning }} </p>
-    <p class="mbl bbo">{{ form.info.errors }} <label for="id_info">{{ form.info.label }}:</label> {{ form.info }} </p>
+    <p>{{ form.info.errors }} <label for="id_info">{{ form.info.label }}:</label> {{ form.info }} </p>
+    <p>{{ form.image.errors }} <label for="id_image">{{ form.image.label }}:</label> {{ form.image }} </p>
+    <p class="mbl bbo">{{ form.audio.errors }} <label for="id_audio">{{ form.audio.label }}:</label> {{ form.audio }} </p>
     <div class="row-list label-ws">{{ form.definite_article.errors }} <label for="id_definite_article">{{ form.definite_article.label }}:</label> {{ form.definite_article }} </div>
     <div class="row-list label-ws">{{ form.indefinite_article.errors }} <label for="id_indefinite_article">{{ form.indefinite_article.label }}:</label> {{ form.indefinite_article }} </div>
     <p>{{ form.plural.errors }} <label for="id_plural">{{ form.plural.label }}:</label> {{ form.plural }} </p>
