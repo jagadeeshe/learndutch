@@ -93,7 +93,19 @@ class UpdateWordView(UpdateView):
 class WordListView(ListView):
     queryset = Word.objects.extra(order_by=['word'])
     template_name = "word_list.html"
-    paginate_by = 15
+    paginate_by = 20
+
+
+class VerbListView(ListView):
+    queryset = Word.objects.filter(word_type=WORD_TYPE_VERB).extra(order_by=['word'])
+    template_name = "word_list.html"
+    paginate_by = 20
+
+
+class NounListView(ListView):
+    queryset = Word.objects.filter(word_type=WORD_TYPE_NOUN).extra(order_by=['word'])
+    template_name = "word_list.html"
+    paginate_by = 20
 
 
 class CreateSentenceView(JSONResponseMixin, View):
