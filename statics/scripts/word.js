@@ -143,3 +143,15 @@ var TagForm = (function(){
         "init": init
     };
 })();
+
+
+var WordForm = (function() {
+
+    var init = function() {
+        $("#id_word").focus();
+    };
+
+    return {
+        "init": init
+    }
+})();
