@@ -13,40 +13,24 @@
     <p>{{ form.info.errors }} <label for="id_info">{{ form.info.label }}:</label> {{ form.info }} </p>
     <p>{{ form.image.errors }} <label for="id_image">{{ form.image.label }}:</label> {{ form.image }} </p>
     <p class="mbl bbo">{{ form.audio.errors }} <label for="id_audio">{{ form.audio.label }}:</label> {{ form.audio }} </p>
+
+    <p>O.T.T.</p>
+    <p>{{ form.present_1st.errors }} <label for="id_present_1st">ik</label> {{ form.present_1st }} </p>
+    <p>{{ form.present_2nd.errors }} <label for="id_present_2nd">jij u</label> {{ form.present_2nd }} </p>
+    <p class="mbl bbo">{{ form.present_3rd.errors }} <label for="id_present_3rd">hij zij het</label> {{ form.present_3rd }} </p>
+
+    <p>O.V.T.</p>
+    <p>{{ form.past_singular.errors }} <label for="id_past_singular">ik jij hij zij het</label> {{ form.past_singular }} </p>
+    <p class="mbl bbo">{{ form.past_plural.errors }} <label for="id_past_plural">wij/we jullie/u zij</label> {{ form.past_plural }} </p>
+
     <table class="frm-table mbl bbo">
-        <tr>
-            <td>&nbsp;</td>
-            <td>O.T.T.</td>
-            <td>O.V.T.</td>
-        </tr>
-        <tr>
-            <td>Ik</td>
-            <td>{{ form.present_1st.errors }} {{ form.present_1st }}</td>
-            <td>{{ form.past_1st.errors }} {{ form.past_1st }}</td>
-        </tr>
-        <tr>
-            <td>Jij/U</td>
-            <td>{{ form.present_2nd.errors }} {{ form.present_2nd }}</td>
-            <td>{{ form.past_2nd.errors }} {{ form.past_2nd }}</td>
-        </tr>
-        <tr>
-            <td>Hij/Zij/het</td>
-            <td>{{ form.present_3rd.errors }} {{ form.present_3rd }}</td>
-            <td>{{ form.past_3rd.errors }} {{ form.past_3rd }}</td>
-        </tr>
-        <tr>
-            <td>Wij <br/> Jullie/U <br/> Zij</td>
-            <td> &nbsp; </td>
-            <td valign="top">{{ form.past_plural.errors }} {{ form.past_plural }}</td>
-        </tr>
-   </table>
-   <table class="frm-table mbl bbo">
         <tr>
             <td valign="top">V.T.T.</td>
             <td>{{ form.past_perfect_aux.errors }} {{ form.past_perfect_aux }}</td>
             <td valign="top">{{ form.past_perfect.errors }}  {{ form.past_perfect }}</td>
         </tr>
     </table>
+
     <input type="submit" value="Submit" />
 </form>
 {% endblock %}
