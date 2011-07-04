@@ -19,6 +19,10 @@ def get_formatted(value, format, ifnone='?'):
         return ifnone
 
 class Word(models.Model):
+    WORD_TYPE_CHOICES = (
+        (WORD_TYPE_PREPOSITION, "Preposition"),
+        (WORD_TYPE_PLAIN, "Plain"),
+    )
     word_type = models.IntegerField(blank=True)
     word = models.CharField(max_length=255, unique=True)
     meaning = models.CharField(max_length=255, null=True, blank=True)

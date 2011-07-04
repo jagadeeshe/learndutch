@@ -3,7 +3,7 @@ Created on May 18, 2011
 
 @author: jagadeesh
 '''
-from django.forms import  ModelForm, Textarea, RadioSelect, HiddenInput
+from django.forms import  ModelForm, Textarea, RadioSelect, HiddenInput, Select
 from models import Noun, Verb, Sentence, Tag, TagObject, Word, Page, Adjective
 from django import forms
 
@@ -40,7 +40,7 @@ class WordForm(ModelForm):
     class Meta:
         model = Word
         widgets = {
-            'word_type': HiddenInput(),
+            'word_type': Select(choices=Word.WORD_TYPE_CHOICES),
             'info': Textarea(attrs={'cols': 50, 'rows': 5}),
         }
 

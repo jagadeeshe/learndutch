@@ -98,7 +98,9 @@ class UpdateWordView(UpdateView):
             self.template_name = 'adjective_form.html'
             self.form_class = AdjectiveForm
             return word.adjective
-        raise Exception('unknown word type')
+        self.template_name = 'word_form.html'
+        self.form_class = WordForm
+        return word
 
     @method_decorator(permission_required('mainapp.edit_word'))
     def dispatch(self, *args, **kwargs):
