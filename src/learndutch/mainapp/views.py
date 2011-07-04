@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import permission_required
 from django.utils.decorators import method_decorator
 
-from forms import NounForm, VerbForm, SentenceForm, TagForm, TagObjectForm, WordForm, PageForm
-from models import Word, Sentence, Tag, WORD_TYPE_NOUN, WORD_TYPE_VERB, TagObject, WORD_TYPE_PLAIN, Page
+from forms import NounForm, VerbForm, SentenceForm, TagForm, TagObjectForm, WordForm, PageForm, AdjectiveForm
+from models import Word, Sentence, Tag, WORD_TYPE_NOUN, WORD_TYPE_VERB, TagObject, WORD_TYPE_PLAIN, Page, WORD_TYPE_ADJECTIVE
 from learndutch.mainapp.utils import CustomDetailView, JSONResponseMixin
 
 class CreateNounView(CreateView):
@@ -27,6 +27,17 @@ class CreateVerbView(CreateView):
     @method_decorator(permission_required('mainapp.add_verb'))
     def dispatch(self, *args, **kwargs):
         return super(CreateVerbView, self).dispatch(*args, **kwargs)
+
+
+class CreateAdjectiveView(CreateView):
+    form_class = AdjectiveForm
+    template_name = "adjective_form.html"
+    success_url = "/add-adjective/"
+    initial = {'word_type': WORD_TYPE_ADJECTIVE}
+
+    @method_decorator(permission_required('mainapp.add_verb'))
+    def dispatch(self, *args, **kwargs):
+        return super(CreateAdjectiveView, self).dispatch(*args, **kwargs)
 
 
 class CreateWordView(CreateView):
@@ -83,6 +94,10 @@ class UpdateWordView(UpdateView):
             self.template_name = 'verb_form.html'
             self.form_class = VerbForm
             return word.verb
+        if word.is_adjective:
+            self.template_name = 'adjective_form.html'
+            self.form_class = AdjectiveForm
+            return word.adjective
         raise Exception('unknown word type')
 
     @method_decorator(permission_required('mainapp.edit_word'))

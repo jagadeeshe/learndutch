@@ -4,7 +4,7 @@ Created on May 18, 2011
 @author: jagadeesh
 '''
 from django.forms import  ModelForm, Textarea, RadioSelect, HiddenInput
-from models import Noun, Verb, Sentence, Tag, TagObject, Word, Page
+from models import Noun, Verb, Sentence, Tag, TagObject, Word, Page, Adjective
 from django import forms
 
 class NounForm(ModelForm):
@@ -24,6 +24,15 @@ class VerbForm(ModelForm):
             'word_type': HiddenInput(),
             'info': Textarea(attrs={'cols': 50, 'rows': 5}),
             'past_perfect_aux': RadioSelect(),
+        }
+
+
+class AdjectiveForm(ModelForm):
+    class Meta:
+        model = Adjective
+        widgets = {
+            'word_type': HiddenInput(),
+            'info': Textarea(attrs={'cols': 50, 'rows': 5}),
         }
 
 

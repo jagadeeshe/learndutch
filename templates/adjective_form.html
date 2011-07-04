@@ -1,0 +1,14 @@
+{% extends "master.html" %}
+{% block content %}
+{% if object %}
+<form action="{{ object.get_edit_url }}" method="post" enctype="multipart/form-data">
+{% else %}
+<form action="{% url add-adjective %}" method="post" enctype="multipart/form-data">
+{% endif %}
+{% csrf_token %}
+    {% include "word_form_common.html" with form=form %}
+    
+    <p>{{ form.diminutive.errors }} <label for="id_plural">{{ form.diminutive.label }}:</label> {{ form.diminutive }} </p>
+    <input type="submit" value="Submit" />
+</form>
+{% endblock %}

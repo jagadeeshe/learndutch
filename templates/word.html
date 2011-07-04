@@ -18,6 +18,9 @@
     {% if object.is_verb %}
         {% include "verb.html" with verb=object.verb %}
     {% endif %}
+    {% if object.is_adjective %}
+        {% include "adjective.html" with adjective=object.adjective %}
+    {% endif %}
     <div class="mbm"><strong>Examples:</strong></div>
     {% include "sentence_list.html" with sentence_list=sentence_list %}
 </div>

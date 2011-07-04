@@ -2,7 +2,9 @@ from django.db import models
 
 WORD_TYPE_NOUN = 1
 WORD_TYPE_VERB = 2
-WORD_TYPE_PLAIN = 3
+WORD_TYPE_ADJECTIVE = 4
+WORD_TYPE_PREPOSITION = 5
+WORD_TYPE_PLAIN = 99
 
 def lookup_value(choices, key, default='?'):
     for k, v in choices:
@@ -32,6 +34,10 @@ class Word(models.Model):
     def is_verb(self):
         return self.word_type == WORD_TYPE_VERB
 
+    @property
+    def is_adjective(self):
+        return self.word_type == WORD_TYPE_ADJECTIVE
+    
     def get_meaning(self):
         return get_formatted(self.meaning, '- %s', '')
 
@@ -103,6 +109,11 @@ class Verb(Word):
 
     def get_past_perfect_aux(self):
         return lookup_value(Verb.PAST_PERFECT_AUX_CHOICES, self.past_perfect_aux)
+
+
+class Adjective(Word):
+    diminutive = models.CharField(max_length=255, null=True, blank=True)
+
 
 
 class Sentence(models.Model):
