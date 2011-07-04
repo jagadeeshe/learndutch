@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from forms import NounForm, VerbForm, SentenceForm, TagForm, TagObjectForm, WordForm, PageForm, AdjectiveForm
 from models import Word, Sentence, Tag, WORD_TYPE_NOUN, WORD_TYPE_VERB, TagObject, WORD_TYPE_PLAIN, Page, WORD_TYPE_ADJECTIVE
 from learndutch.mainapp.utils import CustomDetailView, JSONResponseMixin
+from learndutch.mainapp.models import WORD_TYPE_PREPOSITION
 
 class CreateNounView(CreateView):
     form_class = NounForm
@@ -127,6 +128,12 @@ class NounListView(ListView):
 
 class AdjectiveListView(ListView):
     queryset = Word.objects.filter(word_type=WORD_TYPE_ADJECTIVE).extra(order_by=['word'])
+    template_name = "word_list.html"
+    paginate_by = 20
+
+
+class PrepositionListView(ListView):
+    queryset = Word.objects.filter(word_type=WORD_TYPE_PREPOSITION).extra(order_by=['word'])
     template_name = "word_list.html"
     paginate_by = 20
 

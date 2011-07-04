@@ -14,6 +14,7 @@ main_menu = (
     ('Verbs', '/words/verbs/', None),
     ('Nouns', '/words/nouns/', None),
     ('Adjectives', '/words/adjectives/', None),
+    ('Prepositions', '/words/prepositions/', None),
     ('All words', '/words/', None),
     ('All pages', '/pages/', 'mainapp.view_list_page'),
 )
