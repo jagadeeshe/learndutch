@@ -13,6 +13,7 @@ main_menu = (
     ('Add page', '/add-page/', 'mainapp.add_page'),
     ('Verbs', '/words/verbs/', None),
     ('Nouns', '/words/nouns/', None),
+    ('Adjectives', '/words/adjectives/', None),
     ('All words', '/words/', None),
     ('All pages', '/pages/', 'mainapp.view_list_page'),
 )

@@ -123,6 +123,12 @@ class NounListView(ListView):
     paginate_by = 20
 
 
+class AdjectiveListView(ListView):
+    queryset = Word.objects.filter(word_type=WORD_TYPE_ADJECTIVE).extra(order_by=['word'])
+    template_name = "word_list.html"
+    paginate_by = 20
+
+
 class CreateSentenceView(JSONResponseMixin, View):
     def post(self, request, *args, **kwargs):
         form = SentenceForm(request.POST)
